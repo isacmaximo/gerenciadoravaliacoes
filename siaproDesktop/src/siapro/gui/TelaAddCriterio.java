@@ -1,34 +1,19 @@
 package siapro.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import siapro.controller.CriterioController;
-import siapro.controller.ListarCategoriaController;
-import siapro.dao.CategoriaDAO;
-import siapro.dao.CriterioDAO;
-import siapro.dao.EventoDAO;
 import siapro.model.Categoria;
 import siapro.model.Criterio;
-import siapro.model.Evento;
-
+import siapro.model.CriterioData;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
 
 public class TelaAddCriterio extends JFrame {
 
@@ -55,7 +40,7 @@ public class TelaAddCriterio extends JFrame {
 		textFieldNotaMinima.setText(Double.toString(c.getNotaMinima()));
 		textFieldNotaMaxima.setText(Double.toString(c.getNotaMaxima()));
 		
-//		adicionar outros valores para o restante dos campos do formulário.
+//		adicionar outros valores para o restante dos campos do formulï¿½rio.
 		this.idCriterio = c.getId();
 		
 	}
@@ -63,15 +48,16 @@ public class TelaAddCriterio extends JFrame {
 	
 	public void salvar() {
 		if(textFieldNomeCriterio.getText().isEmpty() || textFieldDescricao.getText().isEmpty() || textFieldNotaMinima.getText().isEmpty() || textFieldNotaMaxima.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Não é possivel salvar dados vazios");
+			JOptionPane.showMessageDialog(null, "Nï¿½o ï¿½ possivel salvar dados vazios");
 		}else {
-			boolean salvou = new CriterioController().salvar(this.categoria, textFieldNomeCriterio.getText(), textFieldDescricao.getText(), textFieldNotaMinima.getText(), textFieldNotaMaxima.getText(), this.idCriterio);
+			CriterioData criterioData = new CriterioData(this.categoria, textFieldNomeCriterio.getText(), textFieldDescricao.getText(), textFieldNotaMinima.getText(), textFieldNotaMaxima.getText(), this.idCriterio);
+			boolean salvou = new CriterioController().salvar(criterioData);
 			if(salvou) {
 				this.textFieldNomeCriterio.setText("");
 				this.textFieldDescricao.setText("");
 				this.textFieldNotaMinima.setText("");
 				this.textFieldNotaMaxima.setText("");
-				JOptionPane.showMessageDialog(null, "Critério salvo com sucesso!!");
+				JOptionPane.showMessageDialog(null, "Critï¿½rio salvo com sucesso!!");
 			}
 		}
 	}

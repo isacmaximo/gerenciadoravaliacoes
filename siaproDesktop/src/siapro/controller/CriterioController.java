@@ -6,20 +6,21 @@ import siapro.dao.CriterioDAO;
 import siapro.dao.EventoDAO;
 import siapro.model.Categoria;
 import siapro.model.Criterio;
+import siapro.model.CriterioData;
 import siapro.model.Evento;
 
 public class CriterioController {
-	public boolean salvar(Categoria categoria, String nome, String descricao, String notaMin, String notaMax, long idCriterio) {
-		double notaMaxima = Double.parseDouble(notaMax);
-		double notaMinima = Double.parseDouble(notaMin);
+	public boolean salvar(CriterioData criterioData) {
+		double notaMaxima = Double.parseDouble(criterioData.getNotaMax());
+		double notaMinima = Double.parseDouble(criterioData.getNotaMin());
 		
 		Criterio c = new Criterio();
-		c.setNome(nome);
-		c.setDescricao(descricao);
+		c.setNome(criterioData.getNome());
+		c.setDescricao(criterioData.getDescricao());
 		c.setNotaMaxima(notaMaxima);
 		c.setNotaMinima(notaMinima);
-		c.setCategoria(categoria);
-		c.setId(idCriterio);
+		c.setCategoria(criterioData.getCategoria());
+		c.setId(criterioData.getIdCriterio());
 		if(c.getId() != 0) {
 			c = (Criterio) new CriterioDAO().editar(c);
 			if(c.getId() != 0) {
