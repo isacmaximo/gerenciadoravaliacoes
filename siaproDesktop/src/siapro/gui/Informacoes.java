@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import siapro.controller.AreaController;
 import siapro.controller.EventoController;
 import siapro.model.Evento;
+import siapro.model.EventoData;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -164,7 +165,14 @@ public class Informacoes extends JFrame {
 					JOptionPane.showMessageDialog(null,"Não é possivel salvar com campos vazios");		
 				}
 				else {
-					new EventoController().editarEvento(textFieldNome.getText(),textAreaInformacoes.getText(), evento.getLiberado(), caminho.toString(), idEvento);
+					EventoData eventoData = new EventoData();
+					eventoData.setNome(textFieldNome.getText());
+					eventoData.setInformacoes(textAreaInformacoes.getText());
+					eventoData.setSituacao(evento.getLiberado());
+					eventoData.setLogotipo(caminho.toString());
+					eventoData.setIdEvento(idEvento);
+					new EventoController().editarEvento(eventoData);
+
 					JOptionPane.showMessageDialog(null,"Alteração salva com sucesso");
 				}					
 			}

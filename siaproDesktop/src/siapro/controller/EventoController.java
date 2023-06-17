@@ -2,15 +2,16 @@ package siapro.controller;
 
 import siapro.dao.EventoDAO;
 import siapro.model.Evento;
+import siapro.model.EventoData;
 
 public class EventoController {
-	public void editarEvento(String nome, String informacoes, Boolean situacao, String logotipo, long idEvento) {
+	public void editarEvento(EventoData eventoData) {
 		Evento evento = new Evento();
-		evento.setNome(nome);
-		evento.setInformacoes(informacoes);
-		evento.setLiberado(situacao);
-		evento.setLogotipo(logotipo);
-		evento.setId(idEvento);
+		evento.setNome(eventoData.getNome());
+		evento.setInformacoes(eventoData.getInformacoes());
+		evento.setLiberado(eventoData.getSituacao());
+		evento.setLogotipo(eventoData.getLogotipo());
+		evento.setId(eventoData.getIdEvento());
 		new EventoDAO().editar(evento);
 	}
 	public Evento atualizar(Evento evento) {
