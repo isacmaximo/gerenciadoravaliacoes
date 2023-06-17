@@ -8,15 +8,6 @@ public class ProjetoData {
     private Area area;
     private long idProjeto;
 
-    // Construtor
-    public ProjetoData(String titulo, String autores, Evento evento, Categoria categoria, Area area, long idProjeto) {
-        this.titulo = titulo;
-        this.autores = autores;
-        this.evento = evento;
-        this.categoria = categoria;
-        this.area = area;
-        this.idProjeto = idProjeto;
-    }
 
     // Getters e Setters
     public String getTitulo() {
