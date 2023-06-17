@@ -1,6 +1,5 @@
 package siapro.gui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.List;
 
@@ -15,10 +14,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import siapro.controller.AddProjetoController;
-import siapro.controller.AreaController;
-import siapro.dao.EventoDAO;
 import siapro.model.Evento;
 import siapro.model.Projeto;
+import siapro.model.ProjetoData;
 import siapro.model.Categoria;
 import siapro.model.Area;
 import java.awt.event.ActionListener;
@@ -52,8 +50,9 @@ public class TelaAddProjeto extends JFrame {
 		if(textFieldTitulo.getText().isEmpty() || textFieldAutores.getText().isEmpty()){
 			JOptionPane.showMessageDialog(null,"Não é possivel salvar com campos vazios");		
 		}
-		else {			
-			new AddProjetoController().salvarProjeto(textFieldTitulo.getText(), textFieldAutores.getText(), evento, c, a, idProjeto);
+		else {
+			ProjetoData projetoData = new ProjetoData(textFieldTitulo.getText(), textFieldAutores.getText(), evento, c, a, idProjeto);			
+			new AddProjetoController().salvarProjeto(projetoData);
 			JOptionPane.showMessageDialog(null,"Projeto salvo com sucesso");
 			new ListarProjeto(evento);
 			dispose();
