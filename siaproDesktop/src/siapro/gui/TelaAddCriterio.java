@@ -50,7 +50,13 @@ public class TelaAddCriterio extends JFrame {
 		if(textFieldNomeCriterio.getText().isEmpty() || textFieldDescricao.getText().isEmpty() || textFieldNotaMinima.getText().isEmpty() || textFieldNotaMaxima.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "N�o � possivel salvar dados vazios");
 		}else {
-			CriterioData criterioData = new CriterioData(this.categoria, textFieldNomeCriterio.getText(), textFieldDescricao.getText(), textFieldNotaMinima.getText(), textFieldNotaMaxima.getText(), this.idCriterio);
+			CriterioData criterioData = new CriterioData();
+			criterioData.setCategoria(this.categoria);
+			criterioData.setNome(textFieldNomeCriterio.getText());
+			criterioData.setDescricao(textFieldDescricao.getText());
+			criterioData.setNotaMin(textFieldNotaMinima.getText());
+			criterioData.setNotaMax(textFieldNotaMaxima.getText());
+			criterioData.setIdCriterio(this.idCriterio);
 			boolean salvou = new CriterioController().salvar(criterioData);
 			if(salvou) {
 				this.textFieldNomeCriterio.setText("");

@@ -7,16 +7,6 @@ public class CriterioData {
     private String notaMin;
     private String notaMax;
     private long idCriterio;
-    
-    public CriterioData(Categoria categoria, String nome, String descricao, String notaMin, String notaMax,
-            long idCriterio) {
-        this.categoria = categoria;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.notaMin = notaMin;
-        this.notaMax = notaMax;
-        this.idCriterio = idCriterio;
-    }
 
     public Categoria getCategoria() {
         return categoria;
