@@ -110,7 +110,12 @@ public class CriterioDAO implements InterfaceDAO {
 			ResultSet rs = this.stmt.executeQuery();
 			Criterio criterio =  new Criterio();
 			if(rs.next()) {
-				criterio = new Criterio(rs.getLong("id"), rs.getString("descricao"), rs.getString("nome"),  rs.getDouble("notaMinima"), rs.getDouble("notaMaxima"));
+				criterio.setId(rs.getLong("id"));
+				criterio.setDescricao(rs.getString("descricao"));
+				criterio.setNome(rs.getString("nome"));
+				criterio.setNotaMaxima(rs.getDouble("notaMaxima"));
+				criterio.setNotaMinima(rs.getDouble("notaMinima"));
+
 				CategoriaDAO ctDAO =  new CategoriaDAO();
 				Categoria ct =(Categoria) ctDAO.pesquisarId(rs.getLong("idCategoria"));
 				criterio.setCategoria(ct);
