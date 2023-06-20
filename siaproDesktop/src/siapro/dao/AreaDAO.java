@@ -49,9 +49,9 @@ public class AreaDAO implements InterfaceDAO{
 	        String sql = "UPDATE area SET nome = ?, descricao = ? WHERE id = ?";
 	        try {
 	            stmt = conexao.prepareStatement(sql);
-	            stmt.setString(1, area.getNome());
-	            stmt.setString(2,area.getDescricao());
-	            stmt.setLong(3, area.getId());
+				stmt.setString(parameterIndex, area.getNome());
+				stmt.setString(parameterIndex++, area.getDescricao());
+	            stmt.setLong(parameterIndex+=parameterIndex++, area.getId());
 	            stmt.execute();
 	            stmt.close();
 	        } catch (Exception e) {
