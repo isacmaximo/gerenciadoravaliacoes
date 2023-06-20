@@ -10,9 +10,9 @@ import siapro.model.Evento;
 import siapro.model.Organizador;
 
 public class TelaInicialController {
-
+	private int id = 8;
 	public List<Evento> listarEventos() {
-		Organizador o = (Organizador) new OrganizadorDAO().pesquisarId(8);
+		Organizador o = (Organizador) new OrganizadorDAO().pesquisarId(id);
 		List<Entidade> entidades = new EventoDAO().listarTudo(o);
 		List<Evento> eventos = new ArrayList<Evento>();
 		
