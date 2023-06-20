@@ -164,7 +164,10 @@ public class AvaliadorDAO implements InterfaceDAO {
 	}
 
 	public List<Avaliador> pesquisarAvaliador(Evento e, Avaliador a) {
-		String sql = "SELECT * FROM avaliador a JOIN eventoAvaliador ea ON ea.idAvaliador =  a.id  WHERE ea.idEvento = ? AND a.nome LIKE ?;";
+		String selectString ="SELECT * FROM avaliador a";
+		String joinString = "JOIN eventoAvaliador ea ON ea.idAvaliador =  a.id";
+		String whereString = "WHERE ea.idEvento = ? AND a.nome LIKE ?;";
+		String sql = selectString + joinString + whereString;
 		try {
 			stmt = conexao.prepareStatement(sql);
 			stmt.setLong(1, e.getId());
