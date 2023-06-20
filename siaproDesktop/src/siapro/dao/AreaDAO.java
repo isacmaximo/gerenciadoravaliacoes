@@ -87,7 +87,11 @@ public class AreaDAO implements InterfaceDAO{
 	
 	public List<Entidade> pesquisarAvaliador(Entidade entidade){
 		Avaliador avaliador = (Avaliador) entidade;
-		String sql = "select a.id, a.nome, a.descricao from avaliadorArea aa inner join area a on a.id = aa.idArea where aa.idAvaliador = ?;";
+		String select = "SELECT a.id, a.nome, a.descricao ";
+		String fromString =  "FROM avaliadorArea aa ";
+		String whereString = "INNER JOIN area a ON a.id = aa.idArea WHERE aa.idAvaliador = ?;";
+		String sql = select + fromString + whereString;
+
 		try {
 			stmt = conexao.prepareStatement(sql);
 			stmt.setLong(1,avaliador.getId()); 
