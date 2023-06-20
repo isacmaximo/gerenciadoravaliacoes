@@ -7,7 +7,6 @@ import siapro.model.Entidade;
 import siapro.model.Evento;
 import siapro.model.Area;
 import siapro.model.Avaliador;
-import siapro.model.Categoria;
 import siapro.dao.AreaDAO;
 
 import java.sql.Connection;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 public class AreaDAO implements InterfaceDAO{
 	private Connection conexao;
 	private PreparedStatement stmt;
+	private int parameterIndex = 1;
 	
 	public AreaDAO() {
 		this.conexao = new Conexao().getConexao();
@@ -30,9 +30,9 @@ public class AreaDAO implements InterfaceDAO{
 			String sql = "INSERT INTO area (nome, idEvento, descricao) VALUES (?,?,?)";
 	        try {
 	            stmt = conexao.prepareStatement(sql);
-				stmt.setString(1, area.getNome());
-				stmt.setLong(2, area.getEvento().getId());
-				stmt.setString(3, area.getDescricao());
+				stmt.setString(parameterIndex, area.getNome());
+				stmt.setLong(parameterIndex++, area.getEvento().getId());
+				stmt.setString(parameterIndex+=parameterIndex++, area.getDescricao());
 	            stmt.execute();
 	            stmt.close();
 	        } catch (Exception e) {
