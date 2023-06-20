@@ -11,11 +11,11 @@ import siapro.model.Entidade;
 import siapro.model.Projeto;
 import siapro.model.Avaliacao;
 import siapro.model.Criterio;
-import siapro.dao.CriterioDAO;
 
 public class AvaliacaoDAO implements InterfaceDAO {
 	 private Connection conexao;
 	 private PreparedStatement stmt;
+	 private int parameterIndex = 1;
 	 
 	 public AvaliacaoDAO() {
 		// TODO Auto-generated constructor stub
@@ -29,10 +29,10 @@ public class AvaliacaoDAO implements InterfaceDAO {
 		Avaliacao avaliacao = (Avaliacao) entidade;
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setLong(1, avaliacao.getAvaliador().getId());
-            stmt.setLong(2, avaliacao.getProjeto().getId());
-            stmt.setDouble(3, avaliacao.getNota());
-            stmt.setBoolean(4, avaliacao.isAvaliacao());
+            stmt.setLong(parameterIndex, avaliacao.getAvaliador().getId());
+            stmt.setLong(parameterIndex ++, avaliacao.getProjeto().getId());
+            stmt.setDouble(parameterIndex +=parameterIndex++, avaliacao.getNota());
+            stmt.setBoolean(parameterIndex ++ *parameterIndex++, avaliacao.isAvaliacao());
             stmt.execute();
             stmt.close();
             
@@ -41,9 +41,9 @@ public class AvaliacaoDAO implements InterfaceDAO {
             	String sql2 = "INSERT INTO avaliacaoCriterio VALUES (?,?,?)";
                 
                 stmt = conexao.prepareStatement(sql2);
-                stmt.setLong(1, avaliacao.getId());
-            	stmt.setLong(2, criterio.getId());
-            	stmt.setDouble(3, criterio.getNota());
+                stmt.setLong(parameterIndex, avaliacao.getId());
+            	stmt.setLong(parameterIndex++, criterio.getId());
+            	stmt.setDouble(parameterIndex +=parameterIndex++, criterio.getNota());
             }
             stmt.execute();
             stmt.close();
