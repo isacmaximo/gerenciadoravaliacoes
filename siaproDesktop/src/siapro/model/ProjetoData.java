@@ -1,5 +1,7 @@
 package siapro.model;
 
+import java.util.List;
+
 public class ProjetoData {
     private String titulo;
     private String autores;
@@ -7,6 +9,15 @@ public class ProjetoData {
     private Categoria categoria;
     private Area area;
     private long idProjeto;
+    private List<Avaliacao> avaliacoes;
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
 
     // Getters e Setters
     public String getTitulo() {

@@ -17,26 +17,17 @@ public class Projeto implements Entidade{
 		
 	}
 	
-	public Projeto(long id, String titulo, String autores, List<Avaliacao> avaliacoes, Evento evento, Area area, Categoria categoria) {
+	public Projeto(ProjetoData data) {
 		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.autores = autores;
-		this.avaliacoes = avaliacoes;
-		this.area = area;
-		this.categoria = categoria;
-		this.evento = evento;
+		data.setIdProjeto(this.id);
+		data.setTitulo(this.titulo);
+		data.setAutores(this.autores);
+		data.setAvaliacoes(avaliacoes);
+		data.setArea(this.area);
+		data.setCategoria(this.categoria);
+		data.setEvento(this.evento);
 	}
-	public Projeto(String titulo, String autores, List<Avaliacao> avaliacoes, Evento evento, Area area, Categoria categoria) {
-		super();
-		this.titulo = titulo;
-		this.autores = autores;
-		this.avaliacoes = avaliacoes;
-		this.area = area;
-		this.categoria = categoria;
-		this.evento = evento;
-	}
-	
+
 	public long getId() {
 		return id;
 	}
