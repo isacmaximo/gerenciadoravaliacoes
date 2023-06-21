@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class TelaAddCriterio extends JFrame {
@@ -45,28 +47,63 @@ public class TelaAddCriterio extends JFrame {
 		
 	}
 	
+	public boolean verificarCampos(){
+		List<Boolean> listaVerificacoes = new ArrayList<>();
+
+		boolean nomeCriterio = textFieldNomeCriterio.getText().isEmpty();
+		boolean descricao = textFieldDescricao.getText().isEmpty();
+		boolean notaMinima = textFieldNotaMinima.getText().isEmpty();
+		boolean notaMaxima = textFieldNotaMaxima.getText().isEmpty();
+
+		boolean tudoVerdadeiro = true;
+		
+		listaVerificacoes.add(nomeCriterio);
+		listaVerificacoes.add(descricao);
+		listaVerificacoes.add(notaMinima);
+		listaVerificacoes.add(notaMaxima);
+
+		for (boolean elemento : listaVerificacoes) {
+            if (!elemento) {
+                tudoVerdadeiro = false;
+                break;
+            }
+        }
+
+		return tudoVerdadeiro;
+
+	}
+	
 	
 	public void salvar() {
-		if(textFieldNomeCriterio.getText().isEmpty() || textFieldDescricao.getText().isEmpty() || textFieldNotaMinima.getText().isEmpty() || textFieldNotaMaxima.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "N�o � possivel salvar dados vazios");
-		}else {
-			CriterioData criterioData = new CriterioData();
-			criterioData.setCategoria(this.categoria);
-			criterioData.setNome(textFieldNomeCriterio.getText());
-			criterioData.setDescricao(textFieldDescricao.getText());
-			criterioData.setNotaMin(textFieldNotaMinima.getText());
-			criterioData.setNotaMax(textFieldNotaMaxima.getText());
-			criterioData.setIdCriterio(this.idCriterio);
-			boolean salvou = new CriterioController().salvar(criterioData);
-			if(salvou) {
-				this.textFieldNomeCriterio.setText("");
-				this.textFieldDescricao.setText("");
-				this.textFieldNotaMinima.setText("");
-				this.textFieldNotaMaxima.setText("");
-				JOptionPane.showMessageDialog(null, "Crit�rio salvo com sucesso!!");
-			}
-		}
-	}
+    String nomeCriterio = textFieldNomeCriterio.getText();
+    String descricao = textFieldDescricao.getText();
+    String notaMinima = textFieldNotaMinima.getText();
+    String notaMaxima = textFieldNotaMaxima.getText();
+
+	boolean camposVazios = verificarCampos();
+
+    if (camposVazios) {
+        JOptionPane.showMessageDialog(null, "Não é possível salvar dados vazios");
+    } else {
+        CriterioData criterioData = new CriterioData();
+        criterioData.setCategoria(this.categoria);
+        criterioData.setNome(nomeCriterio);
+        criterioData.setDescricao(descricao);
+        criterioData.setNotaMin(notaMinima);
+        criterioData.setNotaMax(notaMaxima);
+        criterioData.setIdCriterio(this.idCriterio);
+
+        boolean salvou = new CriterioController().salvar(criterioData);
+        if (salvou) {
+            textFieldNomeCriterio.setText("");
+            textFieldDescricao.setText("");
+            textFieldNotaMinima.setText("");
+            textFieldNotaMaxima.setText("");
+            JOptionPane.showMessageDialog(null, "Critério salvo com sucesso!");
+        }
+    }
+}
+
 	
 
 	/**
