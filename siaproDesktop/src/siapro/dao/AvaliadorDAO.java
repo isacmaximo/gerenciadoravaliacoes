@@ -67,19 +67,19 @@ public class AvaliadorDAO implements InterfaceDAO {
 		try {
 			Avaliador avaliador = (Avaliador) entidade;
 			stmt = conexao.prepareStatement(sql);
-			stmt.setString(1, avaliador.getNome());
-			stmt.setString(2, avaliador.getLogin());
-			stmt.setString(3, avaliador.getSenha());
-			stmt.setLong(4, avaliador.getId());
+			stmt.setString(indice1, avaliador.getNome());
+			stmt.setString(indice2, avaliador.getLogin());
+			stmt.setString(indice3, avaliador.getSenha());
+			stmt.setLong(indice4, avaliador.getId());
 			stmt.execute();
 			stmt.close();
 
 			for (int i = 0; i < avaliador.getArea().size(); i++) {
 				String sql2 = "update avaliadorArea set idAvaliador = ?, idArea = ? where idAvaliador = ?";
 				stmt = conexao.prepareStatement(sql2);
-				stmt.setLong(1, avaliador.getId());
-				stmt.setLong(2, avaliador.getArea().get(i).getId());
-				stmt.setLong(3, avaliador.getId());
+				stmt.setLong(indice1, avaliador.getId());
+				stmt.setLong(indice2, avaliador.getArea().get(i).getId());
+				stmt.setLong(indice3, avaliador.getId());
 				stmt.execute();
 				stmt.close();
 			}
