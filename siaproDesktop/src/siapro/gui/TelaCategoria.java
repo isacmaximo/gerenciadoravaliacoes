@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import siapro.controller.CategoriaController;
+import siapro.model.Categoria;
 
 public class TelaCategoria extends JFrame {
 
@@ -26,7 +27,11 @@ public class TelaCategoria extends JFrame {
 //		cat.setNome(tfNomeCategoria.getText());
 //		cat.setQntMaxAvalProjeto(Integer.parseInt(tfQuantidadeMaxima.getText()));
 //		cat.setQntMinAvalProjeto(Integer.parseInt(tfQuantidadeMinima.getText()));
-		new CategoriaController().salvarCategoria(tfNomeCategoria.getText(), tfQuantidadeMaxima.getText(), tfQuantidadeMinima.getText());
+     Categoria categoriaSalvar =new Categoria();
+	 categoriaSalvar.setNome(tfNomeCategoria.getText());
+	 categoriaSalvar.setQntMaxAvalProjeto(Integer.parseInt(tfQuantidadeMaxima.getText()));
+	 categoriaSalvar.setQntMinAvalProjeto(Integer.parseInt(tfQuantidadeMinima.getText()));
+		new CategoriaController().salvarCategoria(categoriaSalvar);
 	}
 	
 	/**
@@ -54,39 +59,29 @@ public class TelaCategoria extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		JlabelCategoria jlabelCategoria = new JlabelCategoria();
+
+		jlabelCategoria.lblCat(contentPane);
 		
-		JLabel lblCat = new JLabel("CATEGORIA");
-		lblCat.setBounds(165, 12, 110, 14);
-		contentPane.add(lblCat);
-		
-		JLabel lblNewLabel = new JLabel("Nome da Categoria:");
-		lblNewLabel.setBounds(12, 38, 159, 14);
-		contentPane.add(lblNewLabel);
+		jlabelCategoria.lblNewLabel(contentPane);
+
 		
 		tfNomeCategoria = new JTextField();
 		tfNomeCategoria.setBounds(12, 54, 159, 20);
 		contentPane.add(tfNomeCategoria);
 		tfNomeCategoria.setColumns(10);
+
+		jlabelCategoria.lblNewLabel_1(contentPane);
 		
-		JLabel lblNewLabel_1 = new JLabel("Quantidade de Avaliadores:");
-		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(12, 86, 263, 14);
-		contentPane.add(lblNewLabel_1);
-		
-		JLabel lblNewLabel_2 = new JLabel("Quantidade Mínima");
-		lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(12, 112, 159, 14);
-		contentPane.add(lblNewLabel_2);
+		jlabelCategoria.lblNewLabel_2(contentPane);
 		
 		tfQuantidadeMinima = new JTextField();
 		tfQuantidadeMinima.setColumns(10);
 		tfQuantidadeMinima.setBounds(12, 134, 68, 20);
 		contentPane.add(tfQuantidadeMinima);
-		
-		JLabel lblNotamxima = new JLabel("Quantidade Máxima");
-		lblNotamxima.setFont(new Font("Dialog", Font.PLAIN, 12));
-		lblNotamxima.setBounds(235, 112, 159, 14);
-		contentPane.add(lblNotamxima);
+
+		jlabelCategoria.lblNotamxima(contentPane);
 		
 		JButton salvaCategoria = new JButton("Salvar Categoria");
 		salvaCategoria.addActionListener(new ActionListener() {
