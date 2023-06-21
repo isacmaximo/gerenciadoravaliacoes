@@ -17,6 +17,10 @@ public class AvaliadorDAO implements InterfaceDAO {
 
 	private Connection conexao;
 	private PreparedStatement stmt;
+	private int indice1 = 1;
+	 private int indice2 = 2;
+	 private int indice3 = 3;
+	 private int indice4 = 4;
 
 	public AvaliadorDAO() {
 		this.conexao = new Conexao().getConexao();
@@ -29,9 +33,9 @@ public class AvaliadorDAO implements InterfaceDAO {
 
 		try {
 			stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, avaliador.getNome());
-			stmt.setString(2, avaliador.getLogin());
-			stmt.setString(3, avaliador.getSenha());
+			stmt.setString(indice1, avaliador.getNome());
+			stmt.setString(indice2, avaliador.getLogin());
+			stmt.setString(indice3, avaliador.getSenha());
 			stmt.execute();
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -44,8 +48,8 @@ public class AvaliadorDAO implements InterfaceDAO {
 			for (int i = 0; i < avaliador.getArea().size(); i++) {
 				String sql2 = "insert into avaliadorArea(idAvaliador,idArea) values (?,?)";
 				stmt = conexao.prepareStatement(sql2);
-				stmt.setLong(1, avaliador.getId());
-				stmt.setLong(2, areaDAO.pesquisaArea(avaliador.getArea().get(i).getNome()).getId());
+				stmt.setLong(indice1, avaliador.getId());
+				stmt.setLong(indice2, areaDAO.pesquisaArea(avaliador.getArea().get(i).getNome()).getId());
 				stmt.execute();
 				stmt.close();
 			}
