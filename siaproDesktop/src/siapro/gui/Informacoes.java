@@ -1,13 +1,9 @@
 package siapro.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import siapro.controller.AreaController;
 import siapro.controller.EventoController;
 import siapro.model.Evento;
 import siapro.model.EventoData;
@@ -16,11 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
@@ -48,16 +40,14 @@ public class Informacoes extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		JlabelInformacoes jlabelInformacoes = new JlabelInformacoes();
+		JbuttonInformacoes jbuttonInformacoes = new JbuttonInformacoes();
+
+		jlabelInformacoes.lblInformaes(contentPane);
 		
-		JLabel lblInformaes = new JLabel("Informações");
-		lblInformaes.setBackground(Color.MAGENTA);
-		lblInformaes.setForeground(Color.RED);
-		lblInformaes.setBounds(22, 0, 131, 15);
-		contentPane.add(lblInformaes);
-		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(22, 30, 66, 15);
-		contentPane.add(lblNome);
+
+		jlabelInformacoes.lblNome(contentPane);
 		
 		textFieldNome = new JTextField();
 		textFieldNome.setBounds(78, 27, 334, 19);
@@ -65,9 +55,7 @@ public class Informacoes extends JFrame {
 		textFieldNome.setColumns(10);
 		textFieldNome.setText(evento.getNome());
 		
-		JLabel lblLocal = new JLabel("Local:");
-		lblLocal.setBounds(22, 57, 73, 15);
-		contentPane.add(lblLocal);
+		jlabelInformacoes.lblLocal(contentPane);
 		
 		textFieldLocal = new JTextField();
 		textFieldLocal.setEditable(false);
@@ -76,14 +64,9 @@ public class Informacoes extends JFrame {
 		textFieldLocal.setColumns(10);
 		textFieldLocal.setText("IF Goiano - Campus Ceres");
 
+		JButton btnLiberar = jbuttonInformacoes.btnLiberar(contentPane);
 		
-		JButton btnLiberar = new JButton("Liberar");
-		btnLiberar.setBounds(78, 136, 89, 23);
-		contentPane.add(btnLiberar);
-		
-		JButton btnBloquear = new JButton("Bloquear");
-		btnBloquear.setBounds(201, 136, 89, 23);
-		contentPane.add(btnBloquear);
+		JButton btnBloquear = jbuttonInformacoes.btnBloquear(contentPane);
 		
 		btnLiberar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -102,10 +85,8 @@ public class Informacoes extends JFrame {
 				btnBloquear.setEnabled(false);
 			}
 		});
-		
-		JLabel lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(22, 103, 66, 15);
-		contentPane.add(lblEstado);
+
+		jlabelInformacoes.lblEstado(contentPane);
 		
 		textFieldEstado = new JTextField();
 		textFieldEstado.setBounds(78, 100, 207, 20);
@@ -119,14 +100,10 @@ public class Informacoes extends JFrame {
 			btnBloquear.setEnabled(false);
 		}
 
-		JLabel lblLogotipo = new JLabel("Logotipo do Evento:");
-		lblLogotipo.setBounds(22, 229, 131, 14);
-		contentPane.add(lblLogotipo);
-		
-		JLabel lblLogo = new JLabel();
-		lblLogo.setBounds(300, 88, 401, 217);
-		contentPane.add(lblLogo);
+		jlabelInformacoes.lblLogotipo(contentPane);
 
+		JLabel lblLogo = jlabelInformacoes.lblLogo(contentPane);
+		
 		JButton btnEscolherArquivo = new JButton("Enviar Arquivo");
 		btnEscolherArquivo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -146,37 +123,17 @@ public class Informacoes extends JFrame {
 				
 		btnEscolherArquivo.setBounds(145, 225, 133, 23);
 		contentPane.add(btnEscolherArquivo);
-		JLabel lblInformaesSobreO = new JLabel("Informações sobre o Evento");
-		lblInformaesSobreO.setForeground(Color.BLUE);
-		lblInformaesSobreO.setBounds(22, 297, 224, 15);
-		contentPane.add(lblInformaesSobreO);
+
+		jlabelInformacoes.lblInformaesSobreO(contentPane);
+
 	
 		JTextArea textAreaInformacoes = new JTextArea();
 		textAreaInformacoes.setBounds(22, 324, 390, 69);
 		contentPane.add(textAreaInformacoes);
 		textAreaInformacoes.setText(evento.getInformacoes());
 		
-		JButton btnSalvar = new JButton("Salvar Alterações");
-		btnSalvar.addActionListener(new ActionListener() {
-			private long idEvento;
-			public void actionPerformed(ActionEvent e) {
-				this.idEvento = evento.getId();
-				if(textFieldNome.getText().isEmpty() || textAreaInformacoes.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null,"Não é possivel salvar com campos vazios");		
-				}
-				else {
-					EventoData eventoData = new EventoData();
-					eventoData.setNome(textFieldNome.getText());
-					eventoData.setInformacoes(textAreaInformacoes.getText());
-					eventoData.setSituacao(evento.getLiberado());
-					eventoData.setLogotipo(caminho.toString());
-					eventoData.setIdEvento(idEvento);
-					new EventoController().editarEvento(eventoData);
+		JButton btnSalvar = jbuttonInformacoes.btnSalvar(evento, textFieldNome, textAreaInformacoes, caminho);
 
-					JOptionPane.showMessageDialog(null,"Alteração salva com sucesso");
-				}					
-			}
-		});
 					
 		btnSalvar.setForeground(Color.BLUE);
 		btnSalvar.setBounds(313, 404, 176, 25);
