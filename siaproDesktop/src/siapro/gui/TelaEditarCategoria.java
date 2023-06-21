@@ -1,8 +1,5 @@
 package siapro.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -37,15 +34,12 @@ public class TelaEditarCategoria extends JFrame {
 		contentPaneCategoria.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPaneCategoria);
 		contentPaneCategoria.setLayout(null);
-		
-		JLabel lblEditarCategoria = new JLabel(categoria.getId()!=0?"Editar Categoria":"Salvar Categoria");
-		lblEditarCategoria.setFont(new Font("Segoe UI Historic", Font.PLAIN, 17));
-		lblEditarCategoria.setBounds(181, 11, 134, 24);
-		contentPaneCategoria.add(lblEditarCategoria);
-		
-		JLabel lblNomeCategoria = new JLabel("Nome categoria: ");
-		lblNomeCategoria.setBounds(39, 51, 84, 14);
-		contentPaneCategoria.add(lblNomeCategoria);
+
+		JlabelEditar jlabelEditar = new JlabelEditar();
+
+		jlabelEditar.lblEditarCategoria(contentPaneCategoria, categoria);
+
+		jlabelEditar.lblNomeCategoria(contentPaneCategoria);
 		
 		textFieldCategoria = new JTextField();
 		textFieldCategoria.setBounds(39, 76, 237, 20);
@@ -117,24 +111,18 @@ public class TelaEditarCategoria extends JFrame {
 		});
 		btnAdicionarCriterio.setBounds(323, 184, 124, 23);
 		contentPaneCategoria.add(btnAdicionarCriterio);
+
+		jlabelEditar.lblQuantidadeDeAvaliadores(contentPaneCategoria);
 		
-		JLabel lblQuantidadeDeAvaliadores = new JLabel("Quantidade de avaliadores:");
-		lblQuantidadeDeAvaliadores.setBounds(39, 110, 147, 14);
-		contentPaneCategoria.add(lblQuantidadeDeAvaliadores);
-		
-		JLabel lblMin = new JLabel("Min.:");
-		lblMin.setBounds(39, 135, 48, 14);
-		contentPaneCategoria.add(lblMin);
+		jlabelEditar.lblMin(contentPaneCategoria);
 		
 		textFieldMin = new JTextField();
 		textFieldMin.setBounds(72, 131, 65, 20);
 		contentPaneCategoria.add(textFieldMin);
 		textFieldMin.setColumns(10);
 		textFieldMin.setText(Integer.toString(categoria.getQntMinAvalProjeto()));
-		
-		JLabel lblMax = new JLabel("Max.:");
-		lblMax.setBounds(188, 135, 48, 14);
-		contentPaneCategoria.add(lblMax);
+
+		jlabelEditar.lblMax(contentPaneCategoria);
 		
 		textFieldMax = new JTextField();
 		textFieldMax.setBounds(219, 132, 65, 20);
