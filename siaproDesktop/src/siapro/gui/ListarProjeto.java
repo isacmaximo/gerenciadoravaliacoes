@@ -64,31 +64,17 @@ public class ListarProjeto extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		JlabelStyle jlabelStyle = new JlabelStyle();
+		JbuttonStyle jbuttonStyle = new JbuttonStyle();
+
+		jlabelStyle.lblTrabalhos(contentPane);
 		
-		JLabel lblTrabalhos = new JLabel("TRABALHOS");
-		lblTrabalhos.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblTrabalhos.setBounds(12, 8, 114, 15);
-		contentPane.add(lblTrabalhos);
+		jbuttonStyle.btnAddTrabalho(contentPane, evento);
 		
-		JButton btnAddTrabalho = new JButton("Adicionar Trabalhos");
-		btnAddTrabalho.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				TelaAddProjeto tap = new TelaAddProjeto(evento);
-				tap.setVisible(true);
-			}
-		});
-		btnAddTrabalho.setBounds(12, 30, 169, 25);
-		contentPane.add(btnAddTrabalho);
+
+		jbuttonStyle.btnDistribuirTrabalho(contentPane);
 		
-		JButton btnDistribuirTrabalho = new JButton("Distribuir Trabalhos");
-		btnDistribuirTrabalho.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-//				direcionar para a futura tela de distribuir projetos
-			}
-		});
-		btnDistribuirTrabalho.setBounds(214, 30, 183, 25);
-		contentPane.add(btnDistribuirTrabalho);
 		
 		txtfPesquisarProjeto = new JTextField();
 		txtfPesquisarProjeto.addMouseListener(new MouseAdapter() {
@@ -101,16 +87,10 @@ public class ListarProjeto extends JFrame {
 		txtfPesquisarProjeto.setBounds(12, 80, 235, 25);
 		contentPane.add(txtfPesquisarProjeto);
 		txtfPesquisarProjeto.setColumns(10);
-		
-		JLabel lblCategoria = new JLabel("Categoria:");
-		lblCategoria.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblCategoria.setBounds(12, 132, 98, 15);
-		contentPane.add(lblCategoria);
-		
-		JLabel lblrea = new JLabel("Área:");
-		lblrea.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblrea.setBounds(372, 127, 73, 25);
-		contentPane.add(lblrea);
+
+		jlabelStyle.lblCategoria(contentPane);
+
+		jlabelStyle.lblrea(contentPane);
 		
 		
 		JList listaCategoria = new JList(new ListarCategoriaController().listarCategoria(evento).toArray());
@@ -124,11 +104,8 @@ public class ListarProjeto extends JFrame {
 		listaArea.setBackground(UIManager.getColor("CheckBox.background"));
 		listaArea.setBounds(372, 157, 330, 175);
 		contentPane.add(listaArea);
-		
-		JLabel lblTrabalhosAdicionados = new JLabel("Trabalhos Adicionados");
-		lblTrabalhosAdicionados.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblTrabalhosAdicionados.setBounds(12, 350, 194, 15);
-		contentPane.add(lblTrabalhosAdicionados);
+
+		jlabelStyle.lblTrabalhosAdicionados(contentPane);
 		
 		listaTrabalho = new JList(new ListarProjetoController().listarProjeto(evento).toArray());
 		listaTrabalho.setBorder(new LineBorder(new Color(60, 179, 113)));
@@ -145,27 +122,11 @@ public class ListarProjeto extends JFrame {
 		});
 		btnPesquisar.setBounds(255, 78, 114, 25);
 		contentPane.add(btnPesquisar);
+
+		jbuttonStyle.btnEditarTrabalho(contentPane, listaTrabalho);
 		
-		JButton btnEditarTrabalho = new JButton("Editar Trabalho");
-		btnEditarTrabalho.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Projeto p = (Projeto) listaTrabalho.getSelectedValue();
-				new TelaAddProjeto((Projeto) listaTrabalho.getSelectedValue());
-				dispose();
-			}
-		});
-		btnEditarTrabalho.setBounds(500, 374, 147, 25);
-		contentPane.add(btnEditarTrabalho);
 		
-		JButton btnExcluirTrabalho = new JButton("Excluir Trabalho");
-		btnExcluirTrabalho.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				desativar();
-				listaTrabalho.setListData(new ListarProjetoController().listarProjeto(evento).toArray());
-			}
-		});
-		btnExcluirTrabalho.setBounds(500, 425, 152, 25);
-		contentPane.add(btnExcluirTrabalho);
+		jbuttonStyle.btnExcluirTrabalho(contentPane, evento, listaTrabalho);
 		
 		JScrollPane scrollLCategoria = new JScrollPane(listaCategoria);
 		scrollLCategoria.setBounds(12, 157, 342, 175);
@@ -178,11 +139,9 @@ public class ListarProjeto extends JFrame {
 		JScrollPane scrollLTrabalho = new JScrollPane(listaTrabalho);
 		scrollLTrabalho.setBounds(12, 377, 463, 219);
 		contentPane.add(scrollLTrabalho);
-		
-		JLabel lblNomeEvento = new JLabel("EVENTO: " + evento.getNome());
-		lblNomeEvento.setFont(new Font("Dialog", Font.BOLD, 14));
-		lblNomeEvento.setBounds(400, 85, 426, 15);
-		contentPane.add(lblNomeEvento);
+
+		jlabelStyle.lblNomeEvento(contentPane, evento);
+	
  		
 		setVisible(true);
 	}
