@@ -15,7 +15,10 @@ import siapro.model.Criterio;
 public class AvaliacaoDAO implements InterfaceDAO {
 	 private Connection conexao;
 	 private PreparedStatement stmt;
-	 private int parameterIndex = 1;
+	 private int indice1 = 1;
+	 private int indice2 = 2;
+	 private int indice3 = 3;
+	 private int indice4 = 4;
 	 
 	 public AvaliacaoDAO() {
 		// TODO Auto-generated constructor stub
@@ -29,10 +32,10 @@ public class AvaliacaoDAO implements InterfaceDAO {
 		Avaliacao avaliacao = (Avaliacao) entidade;
         try {
             stmt = conexao.prepareStatement(sql);
-            stmt.setLong(parameterIndex, avaliacao.getAvaliador().getId());
-            stmt.setLong(parameterIndex ++, avaliacao.getProjeto().getId());
-            stmt.setDouble(parameterIndex +=parameterIndex++, avaliacao.getNota());
-            stmt.setBoolean(parameterIndex ++ *parameterIndex++, avaliacao.isAvaliacao());
+            stmt.setLong(indice1, avaliacao.getAvaliador().getId());
+            stmt.setLong(indice2, avaliacao.getProjeto().getId());
+            stmt.setDouble(indice3, avaliacao.getNota());
+            stmt.setBoolean(indice4, avaliacao.isAvaliacao());
             stmt.execute();
             stmt.close();
             
@@ -41,9 +44,9 @@ public class AvaliacaoDAO implements InterfaceDAO {
             	String sql2 = "INSERT INTO avaliacaoCriterio VALUES (?,?,?)";
                 
                 stmt = conexao.prepareStatement(sql2);
-                stmt.setLong(parameterIndex, avaliacao.getId());
-            	stmt.setLong(parameterIndex++, criterio.getId());
-            	stmt.setDouble(parameterIndex +=parameterIndex++, criterio.getNota());
+                stmt.setLong(indice1, avaliacao.getId());
+            	stmt.setLong(indice2, criterio.getId());
+            	stmt.setDouble(indice3, criterio.getNota());
             }
             stmt.execute();
             stmt.close();
@@ -61,10 +64,10 @@ public class AvaliacaoDAO implements InterfaceDAO {
 		Avaliacao avaliacao = (Avaliacao) entidade;
 		try {
 			stmt = conexao.prepareStatement(sql);
-            stmt.setLong(1, avaliacao.getAvaliador().getId());
-            stmt.setLong(2, avaliacao.getProjeto().getId());
-            stmt.setDouble(3, avaliacao.getNota());
-            stmt.setBoolean(4, avaliacao.isAvaliacao());
+            stmt.setLong(indice1, avaliacao.getAvaliador().getId());
+            stmt.setLong(indice2, avaliacao.getProjeto().getId());
+            stmt.setDouble(indice3, avaliacao.getNota());
+            stmt.setBoolean(indice4, avaliacao.isAvaliacao());
             stmt.execute();
             stmt.close();
             
@@ -73,8 +76,8 @@ public class AvaliacaoDAO implements InterfaceDAO {
             	 String sql2 = "UPDATE avaliadcaoCriterio(idAvaliacao,idACriterio,nota) values (?,?,?) where idAvaliacao = ?";
                  
                  stmt = conexao.prepareStatement(sql2);
-                 stmt.setLong(1, avaliacao.getId());
-            	 stmt.setLong(2, criterio.getId());
+                 stmt.setLong(indice1, avaliacao.getId());
+            	 stmt.setLong(indice2, criterio.getId());
             }
             stmt.execute();
             stmt.close();
